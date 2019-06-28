@@ -6,15 +6,7 @@
 
 import os
 import re
-# ifconfig_result = os.open('ifconfig ' + 'ens32').read()
-ifconfig_result = 'ens32: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500\
-              inet 10.1.1.12  netmask 255.255.255.0  broadcast 10.1.1.255\
-        inet6 fe80::cd81:9670:2bc7:66b9  prefixlen 64  scopeid 0x20<link>\
-        ether 00:0c:29:12:87:8d  txqueuelen 1000  (Ethernet)\
-        RX packets 9909  bytes 860148 (839.9 KiB)\
-        RX errors 0  dropped 0  overruns 0  frame 0\
-        TX packets 2333  bytes 1032404 (1008.2 KiB)\
-        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0 '
+ifconfig_result = os.popen('ifconfig ' + 'ens32').read()
 #正则表达式查找IP，掩码，广播和mac地址
 ipv4_addr = re.findall('inet\s+(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})\s+',ifconfig_result)[0]
 netmask = re.findall('netmask\s+(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})\s+',ifconfig_result)[0]
